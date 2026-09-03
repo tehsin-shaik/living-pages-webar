@@ -2,7 +2,7 @@
 
 ## Scan the page. Watch the story step out of it.
 
-![Living Pages whale WebAR demo](./images/demo-images/whale-demo.png)
+![Living Pages whale WebAR demo](./public/images/demo-images/whale-demo.png)
 
 Living Pages is a marker-based AR magazine for the browser. Scan a printed page to reveal animated 3D scenes, movement, lighting, and sound—no app required.
 
@@ -34,16 +34,17 @@ Next.js App Router, TypeScript, A-Frame, AR.js, GLB models, and GitHub Pages sta
 ## Local development
 
 ```powershell
-npm install
+npm ci
 npm run dev
 ```
 
-Open <http://localhost:3000>. Camera access requires HTTPS or localhost. For the standalone HTML files, use:
+Open these URLs:
 
-```powershell
-python -m http.server 8000
-```
+* Landing page: <http://localhost:3000/>
+* Preflight page: <http://localhost:3000/preflight.html>
+* AR runtime: <http://localhost:3000/experience.html>
 
+Camera access requires HTTPS or localhost.
 Physical marker tracking, mobile audio, and gesture behavior still require testing on real iOS and Android devices.
 
 ## Project structure
