@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
+
 :root {
     --ink: #0D1117;
     --paper: #F2EEE5;
@@ -10,6 +12,7 @@
     --shadow: 0 18px 45px rgba(13, 17, 23, 0.12);
     --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     --serif: ui-serif, Georgia, "Times New Roman", serif;
+    --heading: "Instrument Serif", Georgia, "Times New Roman", serif;
     --display: "Display", "Display Fallback", Georgia, serif;
     --gutter: clamp(1.25rem, 5vw, 5rem);
     --max-width: 75rem;
@@ -80,7 +83,7 @@ figure {
 h1,
 h2,
 h3 {
-    font-family: var(--serif);
+    font-family: var(--heading);
     font-weight: 400;
     line-height: 0.98;
     letter-spacing: -0.04em;
@@ -294,14 +297,14 @@ p {
 .hero__tagline {
     max-width: 28rem;
     margin-bottom: 1.25rem;
-    font-family: var(--display);
+    font-family: var(--heading);
     letter-spacing: -0.025em;
     font-size: clamp(1.45rem, 3vw, 2.3rem);
     line-height: 1.05;
 }
 
 .hero h1 {
-    font-family: var(--display);
+    font-family: var(--heading);
     letter-spacing: -0.06em;
 }
 
@@ -646,6 +649,12 @@ p {
     margin-top: auto;
 }
 
+.marker-card__link-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+}
+
 .marker-card__links a {
     color: var(--paper);
     font-size: 0.66rem;
@@ -755,21 +764,43 @@ p {
     color: #5B5B55;
 }
 
-.credits__notice {
-    align-self: end;
-    padding: 1.25rem;
-    border-left: 3px solid var(--red);
-    background: var(--white);
+.credits__details {
+    min-width: 0;
 }
 
-.credits__notice p {
-    margin-bottom: 1.25rem;
+.credits__links {
+    display: grid;
+    gap: 0.7rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.credits__links a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+}
+
+.credits__links a:hover {
+    color: var(--red);
+}
+
+.credits__license {
+    max-width: 35rem;
+    margin: 1.5rem 0 0;
     color: #5B5B55;
     font-size: 0.9rem;
 }
 
-.notice-label {
-    color: var(--red);
+.credits__details > .text-link {
+    display: none;
 }
 
 .text-link {

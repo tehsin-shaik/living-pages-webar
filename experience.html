@@ -106,7 +106,7 @@
 
             updateSupportState();
 
-            startButton.addEventListener("click", () => {
+            startButton.addEventListener("click", async () => {
                 const support = getCameraSupport();
 
                 if (!support.secureContext || !support.mediaDevices || !support.getUserMedia) {
@@ -114,7 +114,27 @@
                     return;
                 }
 
-                window.location.href = "./ar-runtime.html";
+                startButton.disabled = true;
+                startButton.setAttribute("aria-busy", "true");
+                supportMessage.textContent = "Requesting camera access...";
+
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({
+                        video: { facingMode: { ideal: "environment" } },
+                        audio: false
+                    });
+
+                    stream.getTracks().forEach((track) => track.stop());
+                    window.location.href = "./ar-runtime.html";
+                } catch (error) {
+                    const denied = error && (error.name === "NotAllowedError" || error.name === "PermissionDeniedError");
+                    supportMessage.textContent = denied
+                        ? "Camera access was denied. Allow camera access for this site, then try again."
+                        : "The camera could not be started. Check this site's camera permission, then try again.";
+                    startButton.disabled = false;
+                    startButton.setAttribute("aria-disabled", "false");
+                    startButton.removeAttribute("aria-busy");
+                }
             });
         })();
     </script>

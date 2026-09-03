@@ -709,14 +709,14 @@
             setCameraError(message);
         };
 
-        scene.addEventListener("camera-init", onCameraInit);
-        scene.addEventListener("arjs-video-loaded", onVideoLoaded);
-        scene.addEventListener("camera-error", onCameraError);
+        window.addEventListener("camera-init", onCameraInit);
+        window.addEventListener("arjs-video-loaded", onVideoLoaded);
+        window.addEventListener("camera-error", onCameraError);
         scene.addEventListener("renderstart", scheduleCanvasControls, { once: true });
         sceneListeners.push(
-            { element: scene, type: "camera-init", handler: onCameraInit },
-            { element: scene, type: "arjs-video-loaded", handler: onVideoLoaded },
-            { element: scene, type: "camera-error", handler: onCameraError },
+            { element: window, type: "camera-init", handler: onCameraInit },
+            { element: window, type: "arjs-video-loaded", handler: onVideoLoaded },
+            { element: window, type: "camera-error", handler: onCameraError },
             { element: scene, type: "renderstart", handler: scheduleCanvasControls }
         );
 

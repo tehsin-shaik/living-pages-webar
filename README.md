@@ -1,65 +1,65 @@
-# AR Marker Experience – WebAR with A-Frame & AR.js
+# Living Pages
 
-This is a **marker-based WebAR experience** built using **A-Frame** and **AR.js**.
+## Scan the page. Watch the story step out of it.
 
-This WebAR project was developed to be integrated into an **interactive magazine experience**. Using marker-based augmented reality (AR), readers can scan printed markers in the magazine using their device’s webcam to bring **3D models**, **animations**, **lighting effects**, and **sound** to life—right from the pages of the magazine. No apps or downloads are needed. Everything runs directly in the browser.
+![Living Pages whale WebAR demo](./images/demo-images/whale-demo.png)
 
-## Features
+Living Pages is a marker-based AR magazine for the browser. Scan a printed page to reveal animated 3D scenes, movement, lighting, and sound—no app required.
 
-- **Mushroom House Marker** – A magical mushroom model with a pulsing animation effect.
-- **Earth Marker** – A rotating 3D Earth with informative climate change messages.
-- **Drone Marker** – A hovering, spinning drone with a glowing light effect that pulses when visible.
-- **Hero Marker** – A superhero model that plays background music along with a shockwave effect when the marker is detected.
-- **Fish Marker (Jumping Whale)** – A whale model that performs a jumping animation from one marker to another using a Bézier curve. The whale faces the direction of movement and disappears at the end of the jump for a natural, interactive effect.
+[Live demo](https://tehsin-shaik.github.io/living-pages-webar/) · [Launch AR](https://tehsin-shaik.github.io/living-pages-webar/preflight.html) · [Browse markers](https://tehsin-shaik.github.io/living-pages-webar/#markers)
 
+## Use it
 
-## Technologies Used
+1. Print a marker or display it full-size on another screen.
+2. Open the AR experience on a camera-enabled device.
+3. Allow camera access and keep the complete marker visible.
+4. Watch the matching chapter appear.
 
-- HTML + JavaScript
-- A-Frame 1.2.0
-- AR.js
-- `.glb` 3D models from SketchFab
-- `.patt` pattern-based markers
-- Visual Studio Code
+The whale chapter requires markers A and B together.
 
-## Live Demo
+## The five chapters
 
-Try the WebAR experience here: [tehsin-shaik.github.io/kurst-magazine-ar/](https://tehsin-shaik.github.io/kurst-magazine-ar/)
+| Chapter | Marker | Scene |
+| --- | --- | --- |
+| Enchanted Habitat | Mushroom | Pulsing mushroom house |
+| Heat Index | Earth | Rotating Earth and climate scene |
+| Flight Control | Drone | Rotating aircraft with controls |
+| Hero Awakening | Hero | Character, shockwave, and sound |
+| Between the Pages | A + B | Whale moving between markers |
 
-## AR Marker Demos
+## Built with
 
-The following demo images show the printed magazine page or marker alongside the live WebAR output rendered during testing.
+Next.js App Router, TypeScript, A-Frame, AR.js, GLB models, and GitHub Pages static export. The landing page is built with Next.js; the camera experience remains a standalone client-side A-Frame/AR.js runtime.
 
-### Mushroom House Marker
-<p align="center">
-  <img src="./images/demo-images/mushroom-demo.png" alt="Mushroom House Marker demo" width="85%">
-</p>
+## Local development
 
-### Earth Marker
-<p align="center">
-  <img src="./images/demo-images/earth-demo.png" alt="Earth Marker demo" width="85%">
-</p>
+```powershell
+npm install
+npm run dev
+```
 
-### Drone Marker
-<p align="center">
-  <img src="./images/demo-images/drone-demo.png" alt="Drone Marker demo" width="85%">
-</p>
+Open <http://localhost:3000>. Camera access requires HTTPS or localhost. For the standalone HTML files, use:
 
-### Hero Marker
-<p align="center">
-  <img src="./images/demo-images/hero-demo.png" alt="Hero Marker demo" width="85%">
-</p>
+```powershell
+python -m http.server 8000
+```
 
-### Fish Marker (Jumping Whale)
-<p align="center">
-  <img src="./images/demo-images/whale-demo.png" alt="Fish Marker Jumping Whale demo" width="85%">
-</p>
+Physical marker tracking, mobile audio, and gesture behavior still require testing on real iOS and Android devices.
 
+## Project structure
 
-<h3>Fish Marker (Jumping Whale)</h3>
-<p align="center">
-  <img src="./images/demo-images/whale-demo.png" alt="Fish Marker Jumping Whale demo" width="85%">
-</p>
+```text
+app/                    Next.js pages and layout
+components/             Landing-page sections
+data/                   Project content
+public/preflight.html   Camera permission gate
+public/experience.html  A-Frame/AR.js runtime
+public/                 Models, markers, images, audio, and runtime assets
+docs/ATTRIBUTION.md     Model and asset credit inventory
+```
 
-## Credits
-Some 3D models used in this project were sourced from Sketchfab.
+## Credits and status
+
+The 3D models were sourced from Sketchfab and remain credited to their original creators. See [`docs/ATTRIBUTION.md`](./docs/ATTRIBUTION.md) for source links and licensing details.
+
+The project is still in development. Audio licensing and physical-device verification remain incomplete, and the printable marker PDF has not been created.

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#111419">
+    <title>Start the Living Pages AR experience</title>
+    <link rel="stylesheet" href="./styles/experience.css">
+</head>
+
+<body class="preflight-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="preflight-header page-shell">
+        <a class="experience-wordmark" href="./" aria-label="Living Pages home">
+            <span class="experience-wordmark__mark" aria-hidden="true">LP</span>
+            <span>Living<br>Pages</span>
+        </a>
+        <a class="text-link" href="./">Back to project</a>
+    </header>
+
+    <main id="main-content" class="preflight-main page-shell" aria-labelledby="preflight-title">
+        <section class="preflight-panel">
+            <p class="eyebrow">Living Pages / camera preflight</p>
+            <h1 id="preflight-title">Ready to bring the page to life?</h1>
+            <p class="preflight-lede">
+                This browser-based AR experience turns five printed markers into moving 3D scenes. Keep the complete
+                black-and-white border in view while you scan.
+            </p>
+
+            <div class="preflight-actions">
+                <button class="button" id="start-camera" type="button">Start Camera <span aria-hidden="true">↗</span></button>
+                <a class="button button--outline" href="./#markers">View Markers <span aria-hidden="true">↓</span></a>
+            </div>
+
+            <p id="camera-support" class="preflight-status" role="status" aria-live="polite">
+                Camera access is required to scan the printed markers.
+            </p>
+
+            <div class="preflight-grid">
+                <div>
+                    <p class="section-kicker">Before you start</p>
+                    <h2>Use a second screen or a printout</h2>
+                    <p>Open one marker full-size on another device, or print the marker pack. The whale scene needs A and B visible together.</p>
+                </div>
+                <div>
+                    <p class="section-kicker">Best conditions</p>
+                    <h2>Good light, steady hands</h2>
+                    <p>Use current Safari on iOS or Chrome on Android for the best chance of compatibility. Camera access requires HTTPS or localhost.</p>
+                </div>
+                <div>
+                    <p class="section-kicker">Sound note</p>
+                    <h2>Sound starts with you</h2>
+                    <p>The hero chapter begins muted. After the camera starts, use the on-screen control if you want to enable its soundtrack.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="preflight-footer page-shell">
+        <span>Living Pages / experimental WebAR magazine</span>
+        <a class="text-link" href="./#credits">Credits and limitations</a>
+    </footer>
+
+    <noscript>
+        <p class="noscript-notice">JavaScript is required to check camera support before starting the AR experience.</p>
+    </noscript>
+
+    <script>
+        (() => {
+            "use strict";
+
+            const startButton = document.querySelector("#start-camera");
+            const supportMessage = document.querySelector("#camera-support");
+            const isLocalhost = ["localhost", "127.0.0.1", "[::1]"].includes(window.location.hostname);
+
+            const getCameraSupport = () => ({
+                secureContext: window.isSecureContext || isLocalhost,
+                mediaDevices: Boolean(navigator.mediaDevices),
+                getUserMedia: Boolean(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
+            });
+
+            const describeSupport = () => {
+                const support = getCameraSupport();
+
+                if (!support.secureContext) {
+                    return "Open this experience over HTTPS or localhost.";
+                }
+
+                if (!support.mediaDevices || !support.getUserMedia) {
+                    return "This browser does not expose the camera API needed for the AR experience.";
+                }
+
+                return "Camera access is required to scan the printed markers.";
+            };
+
+            const updateSupportState = () => {
+                const support = getCameraSupport();
+                const supported = support.secureContext && support.mediaDevices && support.getUserMedia;
+
+                supportMessage.textContent = describeSupport();
+                startButton.disabled = !supported;
+                startButton.setAttribute("aria-disabled", String(!supported));
+            };
+
+            updateSupportState();
+
+            startButton.addEventListener("click", async () => {
+                const support = getCameraSupport();
+
+                if (!support.secureContext || !support.mediaDevices || !support.getUserMedia) {
+                    updateSupportState();
+                    return;
+                }
+
+                startButton.disabled = true;
+                startButton.setAttribute("aria-busy", "true");
+                supportMessage.textContent = "Requesting camera access...";
+
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({
+                        video: { facingMode: { ideal: "environment" } },
+                        audio: false
+                    });
+
+                    stream.getTracks().forEach((track) => track.stop());
+                    window.location.href = "./experience.html";
+                } catch (error) {
+                    const denied = error && (error.name === "NotAllowedError" || error.name === "PermissionDeniedError");
+                    supportMessage.textContent = denied
+                        ? "Camera access was denied. Allow camera access for this site, then try again."
+                        : "The camera could not be started. Check this site's camera permission, then try again.";
+                    startButton.disabled = false;
+                    startButton.setAttribute("aria-disabled", "false");
+                    startButton.removeAttribute("aria-busy");
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>

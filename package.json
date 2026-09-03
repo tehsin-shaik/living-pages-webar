@@ -1,0 +1,40 @@
+{
+  "name": "living-pages-webar",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "preview": "python -m http.server 8000 --directory out"
+  },
+  "dependencies": {
+    "next": "^16.3.4",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "^24.0.0",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "^19.2.0",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.3.3",
+    "postcss": "^8.5.0",
+    "tailwindcss": "4.3.3",
+    "typescript": "6.0.3"
+  },
+  "description": "An interactive marker-based WebAR magazine built with Next.js, A-Frame, and AR.js.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tehsin-shaik/living-pages-webar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tehsin-shaik/living-pages-webar/issues"
+  },
+  "homepage": "https://tehsin-shaik.github.io/living-pages-webar/"
+}
