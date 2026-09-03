@@ -3,7 +3,7 @@ name: Deploy Living Pages to GitHub Pages
 on:
   push:
     branches:
-      - demo-redesign
+      - main
   workflow_dispatch:
 
 permissions:
