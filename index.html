@@ -1,240 +1,302 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/1.7.2/aframe/build/aframe-ar.js"></script>
-    <script
-        src="https://cdn.jsdelivr.net/gh/aarongooner/aframe-gesture-detector/dist/aframe-gesture-detector.js"></script>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Living Pages — Browser-based WebAR magazine</title>
+    <meta name="description"
+        content="Living Pages is a browser-based AR magazine that brings printed pages to life through interactive 3D scenes, movement, light, and sound.">
+    <meta name="theme-color" content="#0D1117">
+    <meta property="og:title" content="Living Pages — Scan the page. Watch the story step out of it.">
+    <meta property="og:description"
+        content="A field guide to worlds that refuse to stay flat: five marker-based WebAR chapters made with A-Frame and AR.js.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Living Pages - Scan the page. Watch the story step out of it.">
+    <meta name="twitter:description"
+        content="A field guide to worlds that refuse to stay flat: five marker-based WebAR chapters made with A-Frame and AR.js.">
+    <meta property="og:url" content="https://tehsin-shaik.github.io/living-pages-webar/">
+    <link rel="canonical" href="https://tehsin-shaik.github.io/living-pages-webar/">
+    <!-- TODO: add an owned 1200x630 social-preview.png with the Living Pages title, a strong AR image, a visible marker, the browser-based WebAR subtitle, and this palette. -->
+    <!-- TODO: add an owned favicon once the project mark is approved for browser chrome. -->
+    <link rel="stylesheet" href="./styles/main.css">
+    <script src="./scripts/hero-scroll.js" defer></script>
 </head>
 
 <body>
-    <a-scene embedded arjs="sourceType: webcam;">
-        <!-- Global Lighting -->
-        <a-light type="ambient" color="#ffffff" intensity="1"></a-light>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header">
+        <a class="wordmark" href="./" aria-label="Living Pages home">
+            <span class="wordmark__mark" aria-hidden="true">LP</span>
+            <span class="wordmark__text">Living<br>Pages</span>
+        </a>
 
-        <!-- MUSHROOM Marker -->
-        <a-marker type="pattern" url="mushroom.patt">
-            <a-entity id="mushroom-wrapper" position="0 0 0" rotation="0 180 0" scale="4 4 4">
-                <!-- Mushroom model with auto pulse -->
-                <a-entity gltf-model="mushroom_house.glb" position="0 0 0"
-                    animation="property: scale; from: 3 3 3; to: 7 7 7; dir: alternate; dur: 1000; loop: true; easing: easeInOutSine;">
-                </a-entity>
-            </a-entity>
-        </a-marker>
+        <nav class="site-nav" aria-label="Primary navigation">
+            <a href="#chapters">Chapters</a>
+            <a href="#markers">Markers</a>
+            <a href="#about">About</a>
+            <a class="button button--small" href="./experience.html">Launch AR</a>
+        </nav>
+    </header>
 
-        <!-- Earth Marker -->
-        <a-marker type="pattern" url="earth.patt">
-            <!-- Ambient Light: Subtle global illumination -->
-            <a-light type="ambient" color="#ffffff" intensity="1.3"></a-light>
+    <main id="main-content">
+        <section class="hero section-pad" aria-labelledby="hero-title" data-motion-state="inactive">
+            <div class="hero__copy">
+                <p class="eyebrow">Interactive magazine / browser-based WebAR</p>
+                <h1 id="hero-title">Living <em>Pages</em></h1>
+                <p class="hero__tagline">Scan the page. Watch the story step out of it.</p>
+                <p class="hero__intro">
+                    An interactive, marker-based AR magazine that brings each page to life with 3D scenes, animation,
+                    movement, light, and sound&mdash;right in your browser. No app required.
+                </p>
+                <div class="button-row">
+                    <a class="button" href="./experience.html">Launch AR Experience</a>
+                    <a class="button button--outline" href="#markers">Get the Markers</a>
+                </div>
+            </div>
 
-            <!-- Directional Light: Simulating the Sun -->
-            <a-light type="directional" color="#FFD700" intensity="1.2" position="5 5 5" target="#earth-wrapper"
-                castShadow="true">
-            </a-light>
+            <figure class="hero__figure">
+                <div class="hero__image-frame">
+                    <!-- TODO: replace this editorial spread with a compressed, muted, captioned demo video using it as the poster. -->
+                    <div class="hero__spread" role="group" aria-label="Two editorial pages from the Living Pages issue">
+                        <div class="hero__spread-panel">
+                            <img src="./images/demo-images/whale-demo.png"
+                                alt="Editorial fish page with A and B markers from the Living Pages issue"
+                                width="1639" height="960" decoding="async">
+                        </div>
+                        <div class="hero__spread-panel">
+                            <img src="./images/demo-images/earth-demo.png"
+                                alt="Editorial Earth and heat page from the Living Pages issue"
+                                width="1562" height="1007" decoding="async">
+                        </div>
+                    </div>
+                    <span class="registration registration--top" aria-hidden="true"></span>
+                    <span class="registration registration--bottom" aria-hidden="true"></span>
+                </div>
+                <figcaption><span>Issue 01</span><span>Five experiments / one printed surface</span></figcaption>
+            </figure>
+        </section>
 
-            <!-- Point Light: Additional lighting to highlight Earth -->
-            <a-light type="point" color="#ffffff" intensity="1" position="0 2 -3" decay="1" castShadow="true"></a-light>
+        <section class="statement proof-strip section-pad" id="about" aria-labelledby="statement-title">
+            <p class="section-kicker">The premise</p>
+            <div class="statement__grid">
+                <h2 id="statement-title">A field guide to worlds that refuse to stay flat.</h2>
+                <div class="statement__body">
+                    <p>
+                        Living Pages explores what happens when a magazine becomes a trigger for something spatial.
+                        Each marker opens a different chapter: a habitat, a changing planet, a flight path, a hero,
+                        and a whale that crosses the gap between two pages.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-            <a-entity id="earth-wrapper" position="0 0 0" rotation="0 90 0" scale="0.5 0.5 0.5">
+        <section class="how section-pad section-pad--paper" aria-labelledby="how-title">
+            <div class="section-heading">
+                <p class="section-kicker">START HERE</p>
+                <h2 id="how-title">How it works</h2>
+            </div>
+            <ol class="steps">
+                <li class="step">
+                    <span class="step__number">01</span>
+                    <h3>Choose a marker</h3>
+                    <p>Select a marker from the library. Print it or display it at full size on a second screen.</p>
+                    <a class="text-link" href="#markers">Browse the marker library <span aria-hidden="true">&darr;</span></a>
+                </li>
+                <li class="step">
+                    <span class="step__number">02</span>
+                    <h3>Launch the AR experience</h3>
+                    <p>Open the AR experience, allow camera access, and point your camera at the full marker.</p>
+                </li>
+                <li class="step">
+                    <span class="step__number">03</span>
+                    <h3>Watch it come alive</h3>
+                    <p>Keep the marker steady and fully visible as the 3D scene appears. Each experience features its own combination of animation, movement, lighting, and sound.</p>
+                </li>
+            </ol>
+        </section>
 
-                <!-- Rotating Earth Model -->
-                <a-entity gltf-model="earth.glb" position="0 0 0"
-                    animation__rotate="property: rotation; to: 0 360 0; dur: 10000; loop: true; easing: linear;">
-                </a-entity>
+        <section class="chapters section-pad" id="chapters" aria-labelledby="chapters-title">
+            <div class="section-heading section-heading--split">
+                <div>
+                    <p class="section-kicker">The issue</p>
+                    <h2 id="chapters-title">Five ways out of the page</h2>
+                </div>
+                <p class="section-heading__aside">Different worlds, one editorial experiment.</p>
+            </div>
 
-                <!-- Fixed Text (NOT a child of rotating Earth) -->
-                <a-entity position="0 0 0">
-                    <a-text value="Climate change affects weather patterns, sea levels, and biodiversity."
-                        position="0 3 0" rotation="0 0 0" scale="1 1 1" color="white" align="center" width="6">
-                    </a-text>
+            <div class="chapter-grid">
+                <article class="chapter chapter--wide">
+                    <div class="chapter__media">
+                        <img src="./images/demo-images/mushroom-demo.png"
+                        alt="Mushroom House 3D model appearing over a printed magazine marker"
+                            width="1548" height="1016" loading="lazy" decoding="async">
+                    </div>
+                    <div class="chapter__content">
+                        <span class="chapter__number">01</span>
+                        <p class="chapter__label">Mushroom House</p>
+                        <h3>Enchanted Habitat</h3>
+                        <p>A storybook house breathes above the marker in a slow, rhythmic pulse.</p>
+                    </div>
+                </article>
 
-                    <a-text value="What can we do? Reduce emissions, use renewable energy, and protect nature."
-                        position="0 2 0" rotation="0 0 0" scale="1 1 1" color="white" align="center" width="6">
-                    </a-text>
-                </a-entity>
+                <article class="chapter">
+                    <div class="chapter__media">
+                        <img src="./images/demo-images/earth-demo.png"
+                        alt="Rotating Earth model and climate message appearing over a magazine page"
+                            width="1562" height="1007" loading="lazy" decoding="async">
+                    </div>
+                    <div class="chapter__content">
+                        <span class="chapter__number">02</span>
+                        <p class="chapter__label">Earth</p>
+                        <h3>Heat Index</h3>
+                        <p>A rotating planet carries a climate note into the room.</p>
+                    </div>
+                </article>
 
-            </a-entity>
-        </a-marker>
+                <article class="chapter">
+                    <div class="chapter__media">
+                        <img src="./images/demo-images/drone-demo.png"
+                        alt="Drone 3D model appearing above a printed magazine marker"
+                            width="1559" height="1009" loading="lazy" decoding="async">
+                    </div>
+                    <div class="chapter__content">
+                        <span class="chapter__number">03</span>
+                        <p class="chapter__label">Drone</p>
+                        <h3>Flight Control</h3>
+                        <p>A survey aircraft turns a flat marker into a flight path.</p>
+                    </div>
+                </article>
 
-        <!-- Drone Marker -->
-        <a-marker type="pattern" url="drone.patt" id="drone-marker">
-            <a-entity id="drone-wrapper" position="0 0 0" scale="1 1 1"
-                gesture-detector="swipeleft: moveLeft; swiperight: moveRight; swipeup: moveUp; swipedown: moveDown;">
+                <article class="chapter">
+                    <div class="chapter__media">
+                        <img src="./images/demo-images/hero-demo.png"
+                        alt="Hero 3D model and shockwave effect appearing above a magazine marker"
+                            width="1513" height="1039" loading="lazy" decoding="async">
+                    </div>
+                    <div class="chapter__content">
+                        <span class="chapter__number">04</span>
+                        <p class="chapter__label">Hero</p>
+                        <h3>Hero Awakening</h3>
+                        <p>A green hero wakes beneath a gold shockwave and an atmospheric track.</p>
+                    </div>
+                </article>
 
-                <!-- Drone Model (Animatable) -->
-                <a-entity gltf-model="drone.glb" position="0 0 0" scale="3 3 3" rotation="0 0 0"
-                    animation="property: rotation; to: 0 360 0; dur: 5000; loop: true; easing: linear;">
-                </a-entity>
-            </a-entity>
-        </a-marker>
+                <article class="chapter chapter--feature">
+                    <div class="chapter__media">
+                        <img src="./images/demo-images/whale-demo.png"
+                        alt="Mythic whale moving between two printed A and B markers"
+                            width="1639" height="960" loading="lazy" decoding="async">
+                    </div>
+                    <div class="chapter__content">
+                        <span class="chapter__number">05</span>
+                        <p class="chapter__label">Whale</p>
+                        <h3>Between the Pages</h3>
+                        <p>A mythic whale arcs across the gap between two markers. Keep A and B in view.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
 
-        <!-- HERO Marker -->
-        <a-marker type="pattern" url="hero.patt" id="hero-marker">
-            <a-entity id="hero-wrapper" position="0 0 0" rotation="0 180 0" scale="0.5 0.5 0.5">
-                <!-- Hero Model -->
-                <a-entity gltf-model="hero.glb" position="0 0 0" scale="0.01 0.01 0.01" rotation="0 240 0"></a-entity>
+        <section class="markers section-pad section-pad--dark" id="markers" aria-labelledby="markers-title">
+            <div class="section-heading section-heading--split">
+                <div>
+                    <p class="section-kicker">Print / place / scan</p>
+                    <h2 id="markers-title">Marker library</h2>
+                </div>
+                <p class="section-heading__aside">Download an individual marker, or open it on a second device while you scan.</p>
+            </div>
 
-                <!-- Background Music -->
-                <a-entity id="hero-music"
-                    sound="src: url(heromusic.mp3); autoplay: false; loop: true; volume: 0.7"></a-entity>
-            </a-entity>
+            <div class="marker-grid">
+                <article class="marker-card">
+                    <div class="marker-card__image"><img src="./mushroom.png" alt="Mushroom House marker: black mushroom emblem inside a square marker" width="512" height="512" loading="lazy" decoding="async"></div>
+                    <div class="marker-card__body"><span class="marker-card__number">01</span><h3>Enchanted Habitat</h3><p>Point the camera at the mushroom marker to reveal the house.</p><div class="marker-card__links"><a href="./mushroom.png" download>Download</a><a href="./mushroom.png" target="_blank" rel="noopener noreferrer">Open full size</a></div></div>
+                </article>
+                <article class="marker-card">
+                    <div class="marker-card__image"><img src="./earth.png" alt="Heat Index marker: blue and green Earth emblem inside a square marker" width="512" height="512" loading="lazy" decoding="async"></div>
+                    <div class="marker-card__body"><span class="marker-card__number">02</span><h3>Heat Index</h3><p>Scan the Earth marker to bring the climate chapter into view.</p><div class="marker-card__links"><a href="./earth.png" download>Download</a><a href="./earth.png" target="_blank" rel="noopener noreferrer">Open full size</a></div></div>
+                </article>
+                <article class="marker-card">
+                    <div class="marker-card__image"><img src="./drone.png" alt="Flight Control marker: black drone emblem inside a square marker" width="512" height="512" loading="lazy" decoding="async"></div>
+                    <div class="marker-card__body"><span class="marker-card__number">03</span><h3>Flight Control</h3><p>Scan the drone marker to reveal the rotating aircraft. Swipe or use the on-screen controls to move it.</p><div class="marker-card__links"><a href="./drone.png" download>Download</a><a href="./drone.png" target="_blank" rel="noopener noreferrer">Open full size</a></div></div>
+                </article>
+                <article class="marker-card">
+                    <div class="marker-card__image"><img src="./hero.png" alt="Hero Awakening marker: illustrated hero face inside a square marker" width="512" height="512" loading="lazy" decoding="async"></div>
+                    <div class="marker-card__body"><span class="marker-card__number">04</span><h3>Hero Awakening</h3><p>Scan the hero marker to reveal the hero and shockwave. Sound support is currently being tested across mobile browsers.</p><div class="marker-card__links"><a href="./hero.png" download>Download</a><a href="./hero.png" target="_blank" rel="noopener noreferrer">Open full size</a></div></div>
+                </article>
+                <article class="marker-card marker-card--pair">
+                    <div class="marker-card__image marker-card__image--pair"><img src="./letterA.png" alt="Between the Pages marker A: large black letter A inside a square marker" width="512" height="512" loading="lazy" decoding="async"><img src="./letterB.png" alt="Between the Pages marker B: large black letter B inside a square marker" width="512" height="512" loading="lazy" decoding="async"></div>
+                    <div class="marker-card__body"><span class="marker-card__number">05</span><h3>Between the Pages</h3><p>Show both A and B markers simultaneously to send the whale across.</p><div class="marker-card__links"><a href="./letterA.png" download>Download A</a><a href="./letterB.png" download>Download B</a><a href="./letterA.png" target="_blank" rel="noopener noreferrer">Open A full size</a><a href="./letterB.png" target="_blank" rel="noopener noreferrer">Open B full size</a></div></div>
+                </article>
+            </div>
+            <p class="marker-note"><strong>Whale note:</strong> A and B are a pair. The whale interaction requires both markers to remain visible at the same time.</p>
+        </section>
 
-            <!-- Shockwave / Power-Up Effect -->
-            <a-ring position="0 0.1 0" radius-inner="0.1" radius-outer="0.2" color="#FFD700" opacity="0.2"
-                rotation="-90 0 0"
-                animation="property: scale; from: 1 1 1; to: 5 5 5; dur: 800; loop: true; dir: alternate;"
-                animation__fade="property: material.opacity; from: 0.6; to: 0.1; dur: 800; loop: true; dir: alternate;">
-            </a-ring>
+        <section class="technical section-pad" aria-labelledby="technical-title">
+            <div class="technical__intro">
+                <div class="section-heading">
+                    <p class="section-kicker">Under the surface</p>
+                    <h2 id="technical-title">Made for the open web</h2>
+                </div>
+                <div class="technical-grid">
+                    <div class="technical-item"><span>01</span><h3>Marker-based AR</h3><p>Pattern markers connect printed pages to browser-rendered scenes.</p></div>
+                    <div class="technical-item"><span>02</span><h3>3D storytelling</h3><p>GLB models become characters, habitats, objects, and moving worlds.</p></div>
+                    <div class="technical-item"><span>03</span><h3>Small toolkit</h3><p>HTML, vanilla JavaScript, A-Frame, AR.js, audio, and GitHub Pages.</p></div>
+                    <div class="technical-item"><span>04</span><h3>Five visual languages</h3><p>Each chapter changes tone while the marker frame keeps the issue coherent.</p></div>
+                </div>
+            </div>
+            <div class="project-guidance" aria-labelledby="guidance-title">
+                <div class="guidance__copy">
+                    <p class="section-kicker">Before you launch</p>
+                    <h2 id="guidance-title">A camera works best with a little room.</h2>
+                    <p>Use a current camera-capable mobile browser and give the marker enough light. Keep the full black-and-white border visible, hold the page steady, and expect the first runtime load to be heavier than a normal web page.</p>
+                </div>
+                <div class="guidance__list">
+                    <p><strong>Mobile</strong><br>Open the AR experience on your phone, then display the marker on another screen or use a printout. Allow camera access when the runtime opens.</p>
+                    <p><strong>Desktop</strong><br>Explore the chapters here; use a phone for AR, a second screen for the marker, or the demo images for a camera-free preview.</p>
+                    <p><strong>If tracking slips</strong><br>Move back slightly, improve the light, and bring the complete marker back into frame.</p>
+                </div>
+            </div>
+        </section>
 
-            <a-light type="directional" color="#FFD700" intensity="2" position="2 5 5" target="#hero-wrapper"
-                castShadow="true">
-            </a-light>
+        <section class="credits section-pad" aria-labelledby="credits-title">
+            <div class="credits__copy">
+                <p class="section-kicker">Credits / attribution</p>
+                <h2 id="credits-title">3D model credits</h2>
+                <p>The 3D models featured in this project were sourced from Sketchfab and remain credited to their original creators.</p>
+            </div>
+            <div class="credits__details">
+                <ul class="credits__links">
+                    <li><a href="https://sketchfab.com/3d-models/mushroom-house-d99d60b4c61a426cb3f8d30599e0c267" target="_blank" rel="noopener noreferrer">Mushroom House — nickheitzman <span aria-hidden="true">↗</span></a></li>
+                    <li><a href="https://sketchfab.com/3d-models/earth-globe-98d2b04d46474bafb4250cc75dc583b3" target="_blank" rel="noopener noreferrer">Earth Globe — matousekfoto <span aria-hidden="true">↗</span></a></li>
+                    <li><a href="https://sketchfab.com/3d-models/parrot-bebop-v2-3d-model-af804ff3c4a8408a8f9bd70182d0beee" target="_blank" rel="noopener noreferrer">Parrot Bebop v2 — omg3d <span aria-hidden="true">↗</span></a></li>
+                    <li><a href="https://sketchfab.com/3d-models/stylized-wood-elf-god-028e1d918fbe40008eb3a273741c6877" target="_blank" rel="noopener noreferrer">Stylized Wood Elf God — JoePrimal <span aria-hidden="true">↗</span></a></li>
+                    <li><a href="https://sketchfab.com/3d-models/blue-whale-textured-d24d19021c724c3a9134eebcb76b0e0f" target="_blank" rel="noopener noreferrer">Blue Whale — Bohdan Lvov <span aria-hidden="true">↗</span></a></li>
+                </ul>
+                <p class="credits__license">Licensing details are available on each model’s original Sketchfab page.</p>
+                <a class="text-link" href="https://github.com/tehsin-shaik/living-pages-webar" target="_blank" rel="noopener noreferrer">View the repository <span aria-hidden="true">↗</span></a>
+            </div>
+        </section>
 
-        </a-marker>
+        <section class="launch section-pad section-pad--dark" aria-labelledby="launch-title">
+            <div class="launch__copy">
+                <p class="section-kicker">The next page is live</p>
+                <h2 id="launch-title">Ready to watch it move?</h2>
+                <p>Keep a marker nearby, open the camera experience, and let one of the five chapters step out of the page.</p>
+            </div>
+            <a class="button button--paper" href="./experience.html">Launch AR Experience <span aria-hidden="true">↗</span></a>
+        </section>
+    </main>
 
-        <!-- FISH MARKERS -->
-        <a-marker type="pattern" url="letterA.patt" id="markerA">
-            <a-entity id="start-point" position="0 0 0"></a-entity>
-        </a-marker>
-
-        <a-marker type="pattern" url="letterB.patt" id="markerB">
-            <a-entity id="end-point" position="0 0 0"></a-entity>
-        </a-marker>
-
-        <!-- Fish Model -->
-        <a-entity id="fish" gltf-model="#fishModel" scale="1 1 1" position="0 0 0" visible="false"></a-entity>
-
-        <!-- Assets -->
-        <a-assets>
-            <a-asset-item id="fishModel" src="mythicwhale.glb"></a-asset-item>
-        </a-assets>
-
-        <!-- Camera -->
-        <a-entity camera></a-entity>
-    </a-scene>
-
-    <!-- Hero Music Logic -->
-    <script>
-        const heroMarker = document.querySelector('#hero-marker');
-        const musicEntity = document.querySelector('#hero-music');
-
-        heroMarker.addEventListener('markerFound', () => {
-            musicEntity.components.sound.playSound();
-        });
-
-        heroMarker.addEventListener('markerLost', () => {
-            musicEntity.components.sound.stopSound();
-        });
-    </script>
-
-    <!-- Drone Gesture Movement -->
-    <script>
-        const drone = document.querySelector('#drone-wrapper');
-
-        // Define movement for swipe gestures
-        function moveLeft() {
-            drone.object3D.position.x -= 0.5; // Move left
-            drone.setAttribute('material', 'color', '#FF0000'); // Change color to red when moved
-        }
-
-        function moveRight() {
-            drone.object3D.position.x += 0.5; // Move right
-            drone.setAttribute('material', 'color', '#00FF00'); // Change color to green
-        }
-
-        function moveUp() {
-            drone.object3D.position.y += 0.5; // Move up
-            drone.setAttribute('material', 'color', '#0000FF'); // Change color to blue
-        }
-
-        function moveDown() {
-            drone.object3D.position.y -= 0.5; // Move down
-            drone.setAttribute('material', 'color', '#FFFF00'); // Change color to yellow
-        }
-    </script>
-
-    <!-- Fish Jump Logic -->
-    <script>
-        const fish = document.querySelector('#fish');
-        const markerA = document.querySelector('#markerA');
-        const markerB = document.querySelector('#markerB');
-        const startPoint = document.querySelector('#start-point');
-        const endPoint = document.querySelector('#end-point');
-
-        let t = 0;
-        let jumping = false;
-
-        fish.addEventListener('model-loaded', (e) => {
-            const animations = e.detail.model.animations;
-            if (animations.length > 0) {
-                fish.setAttribute('animation-mixer', {
-                    clip: animations[0].name,
-                    timeScale: 2
-                });
-            }
-        });
-
-        function getWorldPosition(el) {
-            const pos = new THREE.Vector3();
-            el.object3D.getWorldPosition(pos);
-            return pos;
-        }
-
-        function startJump() {
-            const start = getWorldPosition(startPoint);
-            const end = getWorldPosition(endPoint);
-            const mid = new THREE.Vector3().addVectors(start, end).multiplyScalar(0.5);
-            mid.y += 4;
-
-            t = 0;
-            jumping = true;
-            fish.setAttribute('visible', true);
-
-            const dir = new THREE.Vector3().subVectors(start, end);
-            const angle = Math.atan2(dir.x, dir.z) * (180 / Math.PI);
-            fish.setAttribute('rotation', `0 ${angle} 0`);
-
-            function animateJump() {
-                if (!jumping) return;
-                t += 0.005;
-                if (t > 1) {
-                    jumping = false;
-                    fish.setAttribute('visible', false);
-                    fish.object3D.position.copy(start);
-                    return;
-                }
-
-                const pos = new THREE.Vector3(
-                    parabola(start.x, mid.x, end.x, t),
-                    parabola(start.y, mid.y, end.y, t),
-                    parabola(start.z, mid.z, end.z, t)
-                );
-                fish.object3D.position.copy(pos);
-                requestAnimationFrame(animateJump);
-            }
-
-            animateJump();
-        }
-
-        function parabola(p0, p1, p2, t) {
-            return (1 - t) * (1 - t) * p0 + 2 * (1 - t) * t * p1 + t * t * p2;
-        }
-
-        setInterval(() => {
-            if (markerA.object3D.visible && markerB.object3D.visible && !jumping) {
-                startJump();
-            }
-        }, 1000);
-    </script>
-
+    <footer class="site-footer">
+        <a class="wordmark wordmark--footer" href="./" aria-label="Living Pages home">
+            <span class="wordmark__mark" aria-hidden="true">LP</span>
+            <span class="wordmark__text">Living<br>Pages</span>
+        </a>
+        <p>Scan the page. Watch the story step out of it.</p>
+        <div class="footer-links"><a href="./experience.html">Launch AR</a><a href="#markers">Markers</a><a href="https://github.com/tehsin-shaik/living-pages-webar" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+    </footer>
 </body>
 
 </html>
